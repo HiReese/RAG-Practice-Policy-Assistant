@@ -1,0 +1,2 @@
+# 当前 ingestion 阶段依赖；后续接入 embedding / 向量库时继续追加
+pydantic>=2

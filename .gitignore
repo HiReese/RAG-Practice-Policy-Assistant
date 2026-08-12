@@ -1,0 +1,7 @@
+data/
+rag_policy_assistant.egg-info/
+src/__pycache__/
+.env
+.DS_Store
+.workbuddy
+src/ingestion/__pycache__
