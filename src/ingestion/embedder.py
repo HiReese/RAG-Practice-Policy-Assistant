@@ -9,7 +9,7 @@ used by indexer.py, not for running independently.
 import os
 from abc import ABC, abstractmethod
 from typing import List
-from src.config import PROJECT_ROOT, EMBED_PROVIDERS, settings
+from src.config import EMBED_PROVIDERS
 import logging
 logger = logging.getLogger(__name__) 
 
@@ -91,7 +91,7 @@ def get_embedder(provider: str = "fastembed", **kwargs) -> BaseEmbedder:
         return FastEmbedder(
             model_name=kwargs.get("model_name", "BAAI/bge-small-en-v1.5")
         )
-    if provider in OpenAIEmbedder.PROVIDERS:
+    if provider in EMBED_PROVIDERS:
         return OpenAIEmbedder(
             provider=provider,
             model_name=kwargs.get("model_name"),
@@ -100,5 +100,4 @@ def get_embedder(provider: str = "fastembed", **kwargs) -> BaseEmbedder:
         )
     raise ValueError(
         f"不支持的 provider: {provider}"
-        f"(可选: fastembed / {', '.join(OpenAIEmbedder.PROVIDERS)})"
     )
