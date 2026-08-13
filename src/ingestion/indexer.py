@@ -113,6 +113,11 @@ def run_indexing_job(
 
 
 def main():
+    logging.basicConfig(
+        level=logging.INFO,
+        format="%(asctime)s | %(levelname)-7s | %(name)s | %(message)s",
+    )
+    
     chunks_jsonl: str = DATA_DIR / "processed" / "chunked_confluence.jsonl"
     run_indexing_job(chunks_jsonl)
 
