@@ -1,2 +1,20 @@
-# 当前 ingestion 阶段依赖；后续接入 embedding / 向量库时继续追加
-pydantic>=2
+# ============================================================
+# 运行时依赖(部署到云端也要装这些)
+# 想锁死版本复现:pip freeze 看实际版本,把 >= 换成 == 即可
+# ============================================================
+
+# ---- 核心 ----
+pydantic>=2                # schema 数据契约
+python-dotenv>=1.0         # config.py 读取项目根 .env
+
+# ---- 向量库 ----
+qdrant-client>=1.9         # 连接 Qdrant 的官方客户端
+
+# ---- 文本切分 ----
+langchain-text-splitters>=0.3   # RecursiveCharacterTextSplitter
+
+# ---- Embedding 后端(按需二选一) ----
+# 本地免费后端(默认,零 API key):
+fastembed>=0.3
+# API 后端(provider 切到 openai/gemini 时需要 + 配置 OPENAI_API_KEY 等):
+openai>=1.0
