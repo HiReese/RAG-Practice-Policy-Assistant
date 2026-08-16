@@ -89,7 +89,6 @@ def get_embedder(
         model_name: str, 
         api_key: str = None,
         base_url: str = None, 
-        **kwargs
     ) -> BaseEmbedder:
     """工厂函数:根据 provider 返回对应的 Embedder 实例。"""
     if provider == "fastembed":

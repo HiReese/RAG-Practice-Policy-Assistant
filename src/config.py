@@ -53,10 +53,14 @@ class Settings():
     EMBEDDING_PROVIDER: str = list(EMBED_PROVIDERS.keys())[0]
     EMBEDDING_MODEL_NAME: str = EMBED_PROVIDERS[EMBEDDING_PROVIDER][2][0]
     EMBEDDING_API_KEY: str = os.getenv(EMBED_PROVIDERS[EMBEDDING_PROVIDER][0]) or "** NO API KEY **"
+    EMBEDDING_BASE_URL: str = None
 
     # vector database
     QDRANT_URL: str = "http://localhost:6333"
     QDRANT_COLLECTION_NAME: str = "confluence_policies"
+
+    # sparse search
+    SPARSE_SEARCH_BASE_FILE: str = DATA_DIR / "processed" / "chunked_confluence.jsonl"
 
 
 settings = Settings()

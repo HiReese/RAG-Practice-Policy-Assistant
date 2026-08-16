@@ -81,6 +81,7 @@ def run_indexing_job(
         provider=settings.EMBEDDING_PROVIDER,
         model_name=settings.EMBEDDING_MODEL_NAME,
         api_key=settings.EMBEDDING_API_KEY,
+        base_url=settings.EMBEDDING_BASE_URL,
     )
 
     ingestor = QdrantIngestor(embedder=embedder, collection_name=collection_name)
