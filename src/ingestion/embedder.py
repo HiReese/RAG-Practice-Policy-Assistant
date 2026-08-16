@@ -84,18 +84,24 @@ class OpenAIEmbedder(BaseEmbedder):
         return self._vector_size
 
 
-def get_embedder(provider: str = "fastembed", **kwargs) -> BaseEmbedder:
+def get_embedder(
+        provider: str, 
+        model_name: str, 
+        api_key: str = None,
+        base_url: str = None, 
+        **kwargs
+    ) -> BaseEmbedder:
     """工厂函数:根据 provider 返回对应的 Embedder 实例。"""
     if provider == "fastembed":
         return FastEmbedder(
-            model_name=kwargs.get("model_name", "BAAI/bge-small-en-v1.5")
+            model_name=model_name
         )
     if provider in EMBED_PROVIDERS:
         return OpenAIEmbedder(
             provider=provider,
-            model_name=kwargs.get("model_name"),
-            api_key=kwargs.get("api_key"),
-            base_url=kwargs.get("base_url"),
+            model_name=model_name,
+            api_key=api_key,
+            base_url=base_url,
         )
     raise ValueError(
         f"不支持的 provider: {provider}"
