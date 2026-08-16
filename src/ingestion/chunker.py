@@ -1,5 +1,5 @@
 from langchain_text_splitters import RecursiveCharacterTextSplitter
-from src.ingestion.schemas import ParsedDocument, ChunkRecord
+from src.schemas import ParsedDocument, ChunkRecord
 from pathlib import Path
 
 from src.config import DATA_DIR, settings

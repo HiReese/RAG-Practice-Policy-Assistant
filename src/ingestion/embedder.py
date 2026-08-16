@@ -6,7 +6,6 @@ Embedder 策略层:统一接口,支持多种 embedding 后端。
 
 used by indexer.py, not for running independently.
 """
-import os
 from abc import ABC, abstractmethod
 from typing import List
 from src.config import EMBED_PROVIDERS

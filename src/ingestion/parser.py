@@ -2,7 +2,7 @@ from pathlib import Path
 from typing import Literal
 import re
 from src.config import DATA_DIR
-from src.ingestion.schemas import ParsedDocument
+from src.schemas import ParsedDocument
 import logging
 logger = logging.getLogger(__name__)
 

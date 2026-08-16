@@ -4,7 +4,7 @@ from qdrant_client import QdrantClient
 from qdrant_client.models import VectorParams, Distance, PointStruct
 
 from src.config import settings, DATA_DIR
-from src.ingestion.schemas import ChunkRecord
+from src.schemas import ChunkRecord
 from src.ingestion.embedder import get_embedder, BaseEmbedder
 import logging
 logger = logging.getLogger(__name__) 
