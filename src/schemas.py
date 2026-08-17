@@ -35,7 +35,7 @@ class ChunkRecord(BaseModel):
 # --- Retrieval ---
 class SearchResult(BaseModel):
 
-    child_id: str
+    chunk_id: str
     child_text: str
     parent_text: str
     doc_id: str
