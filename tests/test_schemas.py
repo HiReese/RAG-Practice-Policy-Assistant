@@ -1,7 +1,7 @@
 import pytest
 from pydantic import ValidationError
 
-from src.ingestion.schemas import ChunkRecord, ParsedDocument
+from src.schemas import ChunkRecord, ParsedDocument
 
 
 def test_parsed_document_缺必填字段报错():
