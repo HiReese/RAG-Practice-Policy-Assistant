@@ -62,5 +62,7 @@ class Settings():
     # sparse search
     SPARSE_SEARCH_BASE_FILE: str = DATA_DIR / "processed" / "chunked_confluence.jsonl"
 
+    SEARCH_TOP_K: int = 5
+
 
 settings = Settings()
