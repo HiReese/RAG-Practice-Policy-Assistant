@@ -26,11 +26,16 @@ def retrieve(
     top_k: int = 5,
 ) -> list[list[str]]:
     """returns top_k retrieved doc_ids for each sample, easier for later eval metric calculation"""
-    return [[r.doc_id for r in searcher.search(s.question, top_k=top_k)] for s in samples]
+
+    return [
+        list(dict.fromkeys(r.doc_id for r in searcher.search(s.question, top_k=top_k)))  # 保序去重
+        for s in samples
+    ]
 
 
 # ---------------------------------------------------------------------------
 # eval metrics: hit, recall, mrr, ndcg, @top_k
+# recall ≤ hit_rate, mrr ≤ hit_rate, ndcg ≤ hit_rate, ndcg ≥ mrr (nDCG=1/log₂(r+1) ≥ MRR=1/r)
 # ---------------------------------------------------------------------------
 def _hit(expected: list[str], retrieved: list[str]) -> float:
     """Hit(二值):只要召回里命中任意一个预期 doc_id 就是 1,否则 0。"""
@@ -142,6 +147,12 @@ if __name__ == "__main__":
     ]
     eval_source_types_filter = [["confluence"]]
 
+    metrics = evaluate_searcher(
+            DenseSearcher(), 
+            eval_dataset_path, eval_source_types_filter, 
+            settings.SEARCH_TOP_K
+        )
+    
     metrics = evaluate_searcher(
         Bm25SparseSearcher(), 
         eval_dataset_path, eval_source_types_filter, 
