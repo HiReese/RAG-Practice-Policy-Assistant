@@ -1,9 +1,4 @@
-"""schemas.py —— ingestion 阶段的数据契约(schema)。
-
-设计原则:
-- "可缺失"字段一律给默认值,向后兼容三方调用:
-- 用内置 dict[str, Any](Python >= 3.10),不用旧式 typing.Dict / Optional。
-"""
+#数据契约(schema)
 from typing import Any, Dict, List
 from pydantic import BaseModel, Field
 
