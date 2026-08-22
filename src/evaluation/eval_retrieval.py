@@ -3,6 +3,7 @@ from src.config import DATA_DIR, settings
 from src.schemas import EvalSample, SearchResult
 from src.retrieval.base import BaseSearcher
 from src.retrieval.dense_searcher import DenseSearcher
+from src.retrieval.sparse_searcher import Bm25SparseSearcher
 import math
 
 
@@ -29,7 +30,7 @@ def retrieve(
 
 
 # ---------------------------------------------------------------------------
-# eval metrics
+# eval metrics: hit, recall, mrr, ndcg, @top_k
 # ---------------------------------------------------------------------------
 def _hit(expected: list[str], retrieved: list[str]) -> float:
     """Hit(二值):只要召回里命中任意一个预期 doc_id 就是 1,否则 0。"""
@@ -122,7 +123,7 @@ def evaluate_searcher(
 
     print("\n" + "=" * 50)
     print(f"📈 Retrieval Metrics Summary")
-    print(f"  searcher: {searcher.__class__.__name__} (collection={searcher.collection_name}, embedder={searcher.embedder.__class__.__name__})")
+    print(f"  searcher: {searcher.__class__.__name__} (collection={getattr(searcher, 'collection_name', '')}, embedder={getattr(searcher, 'embedder', type(None)).__class__.__name__})") 
     print("=" * 50)
     for key, value in metrics.items():
         if key == "top_k":
@@ -142,7 +143,7 @@ if __name__ == "__main__":
     eval_source_types_filter = [["confluence"]]
 
     metrics = evaluate_searcher(
-        DenseSearcher(), 
+        Bm25SparseSearcher(), 
         eval_dataset_path, eval_source_types_filter, 
         settings.SEARCH_TOP_K
     )
